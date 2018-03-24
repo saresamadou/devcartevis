@@ -1,6 +1,7 @@
 package fr.aboudou.devcartevisv1.service.impl;
 
 import fr.aboudou.devcartevisv1.domain.Developpeur;
+import fr.aboudou.devcartevisv1.enums.BU;
 import fr.aboudou.devcartevisv1.exceptions.DeveloppeurDejaExistantException;
 import fr.aboudou.devcartevisv1.exceptions.DeveloppeurNotFoundException;
 import fr.aboudou.devcartevisv1.repository.DeveloppeurRepository;
@@ -34,7 +35,7 @@ public class DeveloppeurServiceImpl implements DeveloppeurService {
     @Override
     public Developpeur recupererDeveloppeurParId(Long id) {
         verifierExistanceDeveloppeur(id);
-        return  developpeurRepository.findById(id).get();
+        return developpeurRepository.findById(id).get();
     }
 
     @Override
@@ -43,16 +44,33 @@ public class DeveloppeurServiceImpl implements DeveloppeurService {
         return developpeurRepository.save(developpeur);
     }
 
+    @Override
+    public Developpeur majEmailDeveloppeur(Long id, String email) {
+        verifierExistanceDeveloppeur(id);
+        Developpeur developpeur = developpeurRepository.findById(id).get();
+        developpeur.setEmail(email);
+        developpeurRepository.save(developpeur);
+        return developpeur;
+    }
+
+    @Override
+    public Developpeur majBuDeveloppeur(Long id, BU bu) {
+        verifierExistanceDeveloppeur(id);
+        Developpeur developpeur = developpeurRepository.findById(id).get();
+        developpeur.setBu(bu);
+        return developpeurRepository.save(developpeur);
+    }
+
     private void verifierExistanceDeveloppeur(String email) {
         Developpeur developpeur = developpeurRepository.findByEmail(email);
-        if(developpeur != null) {
+        if (developpeur != null) {
             throw new DeveloppeurDejaExistantException(messageDeveloppeurDejaExistant);
         }
     }
 
     private void verifierExistanceDeveloppeur(Long id) {
         Optional<Developpeur> optionalDeveloppeur = developpeurRepository.findById(id);
-        if(!optionalDeveloppeur.isPresent()) {
+        if (!optionalDeveloppeur.isPresent()) {
             throw new DeveloppeurNotFoundException(messageDeveloppeurNonTrouve);
         }
     }
