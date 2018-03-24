@@ -1,0 +1,1 @@
+INSERT INTO t_developpeurs(dev_nom, dev_email, dev_type, dev_bu ) VALUES ('Abou', 'abou@abou.esn', 'JAVA', 'FRANCE');

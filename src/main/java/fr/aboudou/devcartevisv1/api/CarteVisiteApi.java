@@ -1,5 +1,7 @@
 package fr.aboudou.devcartevisv1.api;
 
+import fr.aboudou.devcartevisv1.service.DeveloppeurService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -8,8 +10,11 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/cartevisite")
 public class CarteVisiteApi {
 
-    @GetMapping("/dev")
+    @Autowired
+    private DeveloppeurService developpeurService;
+
+    @GetMapping("/info")
     public String afficherCarteVisite() {
-        return "Application pour visualiser les cartes de visite de nos développeurs, travail en cours...";
+        return developpeurService.donnerInformations();
     }
 }

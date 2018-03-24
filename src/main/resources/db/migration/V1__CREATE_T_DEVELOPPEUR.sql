@@ -1,0 +1,11 @@
+CREATE TABLE t_developpeurs(
+dev_id INTEGER NOT NULL AUTO_INCREMENT ,
+dev_nom VARCHAR(25) NOT NULL,
+dev_email VARCHAR(25) NOT NULL,
+dev_type VARCHAR(10) NOT NULL ,
+dev_bu VARCHAR(10) NOT NULL ,
+  PRIMARY KEY (dev_id)
+);
+
+
+
