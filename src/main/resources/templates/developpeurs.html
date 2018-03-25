@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <!--Bootstrap CSS-->
+    <link rel="stylesheet" href="/webjars/bootstrap/3.3.7-1/css/bootstrap.min.css">
+    <!--Bootstrap et JQUERY JS-->
+    <script src="/webjars/jquery/3.1.1/jquery.min.js"></script>
+    <script src="/webjars/bootstrap/3.3.7-1/js/bootstrap.min.js"></script>
+    <title>DevCarteVis</title>
+</head>
+<body>
+<div class="container">
+    <div class="header clearfix">
+        <nav>
+            <ul class="nav nav-pills pull-right">
+                <li role="presentation" class="active"><a href="/">Acceuil</a></li>
+                <li role="presentation"><a href="/admin">Administration</a></li>
+            </ul>
+        </nav>
+        <h3 class="text-muted">DEV CARTE VIS</h3>
+    </div>
+    <div class="jumbotron">
+        <h1>Application de consultation de la carte de visite des développeurs</h1>
+    </div>
+
+    <div>
+
+        <input type="text" id="myInput" onkeyup="myFunction()" placeholder="Rechercher par nom..">
+
+        <table id="myTable" class="table table-hover">
+            <thead>
+            <tr>
+                <th scope="col">Identifiant</th>
+                <th scope="col">Nom</th>
+                <th scope="col">Email</th>
+                <th scope="col">TypeDeveloppeur</th>
+                <th scope="col">Bu</th>
+            </tr>
+            </thead>
+            <tbody>
+            <th:block th:each="developpeur : ${developpeurs}">
+                <tr>
+                    <td th:text="${developpeur.identifiant}"></td>
+                    <td th:text="${developpeur.nom}"></td>
+                    <td th:text="${developpeur.email}"></td>
+                    <td th:text="${developpeur.typeDeveloppeur}"></td>
+                    <td th:text="${developpeur.bu}"></td>
+                    <td class="btn btn-success">Carte</td>
+                </tr>
+            </th:block>
+            </tbody>
+        </table>
+    </div>
+</div>
+</body>
+<script>
+    function myFunction() {
+        // Declare variables
+        var input, filter, table, tr, td, i;
+        input = document.getElementById("myInput");
+        filter = input.value.toUpperCase();
+        table = document.getElementById("myTable");
+        tr = table.getElementsByTagName("tr");
+
+        // Loop through all table rows, and hide those who don't match the search query
+        for (i = 0; i < tr.length; i++) {
+            td = tr[i].getElementsByTagName("td")[0];
+            if (td) {
+                if (td.innerHTML.toUpperCase().indexOf(filter) > -1) {
+                    tr[i].style.display = "";
+                } else {
+                    tr[i].style.display = "none";
+                }
+            }
+        }
+    }
+</script>
+</html>
